@@ -44,8 +44,12 @@ public class GenericTreeNode<T>
     public int Count()
     {
         //TODO #4: Return the total number of elements in this tree
-
-        return 0;
+        int contador = 1;
+        for(int i = 0; i < Children.Count(); i++)
+        {
+            contador+= Children.Get(i).Count();
+        }
+        return contador;
     }
 
     public int Depth()
