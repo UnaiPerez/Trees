@@ -7,10 +7,14 @@ public class GenericTreeNode<T>
 {
     private T Value;
     private GenericList<GenericTreeNode<T>> Children;
+    int NumElements = 0;
 
     public GenericTreeNode(T value)
     {
         //TODO #2: Initialize member variables/attributes
+        Value = value;
+        GenericTree<T> tree = new GenericTree<T>();
+        Children = new GenericList<GenericTreeNode<T>>();
     }
 
     public string AsString(int depth)
@@ -33,7 +37,9 @@ public class GenericTreeNode<T>
     public GenericTreeNode<T> Add(T value)
     {
         //TODO #3: Add a new instance of class GenericTreeNode<T> with Value=value. Return the instance we just created
-        
+        GenericTreeNode<T> child = new GenericTreeNode<T>(value);
+        Children.Add(child);
+        NumElements++;
         return null;
     }
 
