@@ -110,7 +110,7 @@ public class GenericList<T> : IGenericList<T>
 
         if (index == 0)
         {
-            First = First?.Next;
+            First = First.Next;
         }
         else
         {

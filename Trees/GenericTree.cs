@@ -7,13 +7,14 @@ public class GenericTreeNode<T>
 {
     private T Value;
     private GenericList<GenericTreeNode<T>> Children;
-    
+
 
     public GenericTreeNode(T value)
     {
         //TODO #2: Initialize member variables/attributes
         Value = value;
         Children = new GenericList<GenericTreeNode<T>>();
+        
     }
 
     public string AsString(int depth)
@@ -45,7 +46,7 @@ public class GenericTreeNode<T>
     {
         //TODO #4: Return the total number of elements in this tree
         int contador = 1;
-        for(int i = 0; i < Children.Count(); i++)
+        for (int i = 0; i < Children.Count(); i++)
         {
             contador+= Children.Get(i).Count();
         }
@@ -56,7 +57,16 @@ public class GenericTreeNode<T>
     {
         //TODO #5: Return the depth of this tree
 
-        return 0;
+        int contador = 0;
+        for(int i = 0; i < Children.Count();i++)
+        {
+            int depth = Children.Get(i).Depth();
+            if(depth > contador)
+            {
+                contador = depth;
+            }
+        }
+        return 1 + contador;
     }
 
     
@@ -65,6 +75,7 @@ public class GenericTreeNode<T>
     {
         //TODO #6: Remove the child node that has Value=value. We only check children nodes for this value. If it's not found, do nothing
         
+      
     }
 }
 
@@ -79,3 +90,5 @@ public class GenericTree<T>
         else return RootNode.AsString(0);
     }
 }
+
+
