@@ -77,13 +77,12 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
     public int Count()
     {
         //TODO #3: Return the total number of elements in this tree
-        int leftNull = 0;
-        int rightNull = 0;
+        
         int leftCount = 0;
         int rightCount = 0;
         if(LeftChild == null)
         {
-            leftNull = 0;
+            leftCount = 0;
         }
         else
         {
@@ -91,21 +90,41 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
         }
         if(RightChild == null)
         {
-            rightNull = 0;
+            rightCount = 0;
         }
         else
         {
             rightCount = RightChild.Count();
         }
 
-        return 1 + leftNull + rightNull + leftCount + rightCount ;
+        return 1 + + leftCount + rightCount ;
     }
 
     public int Depth()
     {
         //TODO #4: Return the maximum depth of this tree
-        
-        return 0;
+
+        int leftDepth = 0;
+        int rightDepth = 0;
+        if(LeftChild != null)
+        {
+            leftDepth = LeftChild.Depth();
+        }
+        else
+        {
+            leftDepth= 0;
+        }
+        if(RightChild != null)
+        {
+            rightDepth = RightChild.Depth();
+        }
+        else
+        {
+            rightDepth = 0;
+        }
+
+
+        return 1 + Math.Max(leftDepth, rightDepth);
     }
 
     public TValue Get(TKey key)
