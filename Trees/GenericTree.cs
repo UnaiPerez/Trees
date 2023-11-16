@@ -74,7 +74,17 @@ public class GenericTreeNode<T>
     public void Remove(T value)
     {
         //TODO #6: Remove the child node that has Value=value. We only check children nodes for this value. If it's not found, do nothing
-        
+        for(int i = 0; i < Children.Count(); i++)
+        {
+            if (Children.Get(i).Value.Equals(value))
+            {
+                Children.Remove(i);
+            }
+            else
+            {
+                Children.Get(i).Remove(value);
+            }
+        }
       
     }
 }
