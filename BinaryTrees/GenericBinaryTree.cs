@@ -77,9 +77,28 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
     public int Count()
     {
         //TODO #3: Return the total number of elements in this tree
+        int leftNull = 0;
+        int rightNull = 0;
+        int leftCount = 0;
+        int rightCount = 0;
+        if(LeftChild == null)
+        {
+            leftNull = 0;
+        }
+        else
+        {
+            leftCount = LeftChild.Count();
+        }
+        if(RightChild == null)
+        {
+            rightNull = 0;
+        }
+        else
+        {
+            rightCount = RightChild.Count();
+        }
 
-
-        return 0 ;
+        return 1 + leftNull + rightNull + leftCount + rightCount ;
     }
 
     public int Depth()
