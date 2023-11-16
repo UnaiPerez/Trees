@@ -11,7 +11,10 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
     public GenericBinaryTreeNode(TKey key, TValue value)
     {
         //TODO #1: Initialize member variables/attributes
-       
+        Value = value;
+        Key = key;
+        LeftChild = null;
+        RightChild = null;
         
     }
 
@@ -43,7 +46,32 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
         //          -If the current node has a lower key that the new node (use CompareTo()), the new node should be on this node's right side.
         //          -If the current node and the new node have the same key, just update this node's value with the new node's value
         
-       
+        if(Key.CompareTo(node.Key) == 0)
+        {
+            Value = node.Value;
+        }
+        else if(Key.CompareTo(node.Key) > 0)
+        {
+            if(LeftChild == null)
+            {
+                LeftChild = node;
+            }
+            else
+            {
+                LeftChild.Add(node);
+            }
+        }
+        else if(Key.CompareTo(node.Key)  < 0)
+        {
+            if(RightChild == null) 
+            { 
+                RightChild = node;
+            }
+            else
+            {
+                RightChild.Add(node);
+            }
+        }
     }
 
     public int Count()
