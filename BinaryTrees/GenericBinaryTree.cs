@@ -1,5 +1,6 @@
 
 using System;
+using System.Xml.Linq;
 
 public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
 {
@@ -50,7 +51,7 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
         {
             Value = node.Value;
         }
-        else if(Key.CompareTo(node.Key) > 0)
+        else if(Key.CompareTo(node.Key) < 0)
         {
             if(LeftChild == null)
             {
@@ -61,7 +62,7 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
                 LeftChild.Add(node);
             }
         }
-        else if(Key.CompareTo(node.Key)  < 0)
+        else if(Key.CompareTo(node.Key)  > 0)
         {
             if(RightChild == null) 
             { 
@@ -135,7 +136,7 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
         //              b) Else, we should ask the LeftChild to find the node recursively. It must be below LeftChild
         //          -If the current node has a lower key that the new node (use CompareTo()), the key should be on this node's right side.
         //          -If the current node and the new node have the same key, just return this node's value. We found it
-        if(Key.CompareTo(key) > 0)
+        if(Key.CompareTo(key) < 0)
         {
             if(LeftChild == null)
             {
@@ -146,7 +147,7 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
                 return LeftChild.Get(key);  
             }
         }
-        else if(Key.CompareTo(key) < 0)
+        else if(Key.CompareTo(key) > 0)
         {
             if (RightChild == null)
             {
@@ -171,9 +172,47 @@ public class GenericBinaryTreeNode<TKey, TValue> where TKey : IComparable<TKey>
     {
         //TODO #6: Remove the node that has this key. The parent may need to update one of its children, so this method returns the node with which this node needs to be replaced
         //          If this node isn't the one we are looking for, we will return this, so that the parent node can replace LeftChild/RightChild with the same node it had
+        if(Key.CompareTo(key) < 0)
+        {
+            if(LeftChild != null)
+            {
+                LeftChild = LeftChild.Remove(key);
+            }
+        }
+        else if(Key.CompareTo(key) > 0 )
+        {
+            if(RightChild != null)
+            {
+                RightChild = RightChild.Remove(key);
+            }
+        }
+        else
+        {
+            if (LeftChild == null)
+            {
+                return RightChild;
+            }
+            else if (RightChild == null)
+            {
+                return LeftChild;
+            }
+            
+             Key = FindMin(RightChild).Key;
+             RightChild = RightChild.Remove(Key);
 
-        return null;
+        }
+        return this;
     }
+
+    private GenericBinaryTreeNode<TKey, TValue> FindMin(GenericBinaryTreeNode<TKey, TValue> node)
+    {
+        while (node.LeftChild != null)
+        {
+            node = node.LeftChild;
+        }
+        return node;
+    }
+
 
     public int KeysToArray(TKey[] keys, int index)
     {
